@@ -1,0 +1,69 @@
+
+  <section>
+
+    <div class="mat-display-2 inner">Sale</div>
+    <div class="inner">
+      <mat-slide-toggle>Slide me!</mat-slide-toggle>
+    </div>
+
+  </section>
+
+
+
+  <table id="row2">
+    <tr>
+      <td>
+        <form class="example-form">
+          <mat-form-field class="example-full-width" appearance='outline' color>
+            <mat-label>Customer Name</mat-label>
+            <input type="text"  aria-label="Number" matInput [formControl]="myControl"
+              [matAutocomplete]="auto">
+            <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+              <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                {{option}}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+        </form>
+      </td>
+      <td>
+        <mat-form-field class="example-form-field">
+          <mat-label>Invoice</mat-label>
+          <input matInput type="text" [(ngModel)]="value">
+        </mat-form-field>
+      </td>
+    </tr>
+  </table>
+    <table id="row2">
+      <tr>
+        <td></td>
+        <td>
+          <mat-form-field class="example-form-field" appearance="standard">
+            <mat-label>Invoice Date</mat-label>
+            <input matInput [matDatepicker]="picker">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </td>
+      </tr>
+    </table>
+    <table id="row2">
+      <tr>
+        <td></td>
+        <td>
+          <mat-form-field class="example-form-field" appearance="standard">
+            <mat-label>State of supply</mat-label>
+            <mat-select>
+              <mat-option>None</mat-option>
+              <mat-option *ngFor="let state of states" [value]="state">{{state}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </td>
+      </tr>
+    </table>
+
+    <app-table></app-table>
+
+  <app-footerform></app-footerform>
+
+

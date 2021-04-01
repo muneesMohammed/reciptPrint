@@ -1,0 +1,30 @@
+.inner
+{
+    display: inline-block;
+    margin-left: 15px;
+}
+.example-full-width {
+  width: 100%;
+}
+.example-form {
+  //min-width: 150px;
+ max-width: 350px;
+  //width: 100%;
+
+
+}
+.example-form-field {
+  width: 200px;
+}
+
+
+
+
+#row2 {
+  margin-top: -25px;
+  margin-left: 2rem;
+  width: 95%;
+  border-collapse: collapse;
+// border: 2px solid #444141;
+  text-align: right
+}

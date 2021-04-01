@@ -1,0 +1,93 @@
+
+
+
+
+
+#customers {
+  margin-top: 2rem;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#customers td, #customers th {
+  border: 1px solid #ddd;
+  padding: 10px;
+  height: 20px;
+}
+
+#customers tr:nth-child(even){background-color:whitesmoke;}
+
+#customers tr:hover {background-color: rgb(248, 248, 248);
+  .edit_hover_class a {
+    display:block;
+  }
+}
+
+#customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: white;
+  color: rgb(85, 83, 83);
+}
+.hide{
+  display: none;
+}
+
+.footer{
+  margin-top: -30px;
+  text-align: right;
+}
+
+  input:focus {
+  width: 100%;
+  padding: 8px 20px;
+  //margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 2px;
+  box-sizing: border-box;
+}
+
+.edit_hover_class{width: 10px;
+height: 30px;}
+.edit_hover_class a{
+  display:none;
+  }
+ /** .edit_hover_class:hover a {
+    display:block;
+  }**/
+
+/**input[type=text]:focus, textarea:focus {
+  //@include box-shadow(0 0 5px rgba(81, 203, 238, 1));
+  padding: 3px 0px 3px 3px;
+  margin: 5px 1px 3px 0px;
+  border: 1px solid rgba(81, 203, 238, 1);
+}**/
+.icon {
+  width: 30px;
+  height: 25px;
+ // padding-top: -40px;
+  margin-top: -60px;
+  //display: inline-block;
+  //border: 1px solid #ccc;
+  //font-size: 10px;
+  //text-align: left;
+}
+
+
+#noBorder td,#noBorder th {
+  border:none;
+  height: 20px;
+  background-color: white;
+
+}
+
+
+.align{text-align: right;
+  margin-right: 1rem;
+  margin-top: -90px;
+  margin-bottom: -2rem;
+
+
+}

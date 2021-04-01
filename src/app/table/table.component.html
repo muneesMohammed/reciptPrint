@@ -1,0 +1,177 @@
+<table id="customers">
+
+  <tr>
+    <th rowspan="2" style="max-width: 30px;">#</th>
+    <th rowspan="2" [ngClass]="theCheckbox == false ? 'hide' : ''">CATEGORY</th>
+    <th rowspan="2" style=" min-width: 400px;">ITEM</th>
+    <th rowspan="2" [ngClass]="theCheckbox1 == false ? 'hide' : ''">ITEM CODE</th>
+    <th rowspan="2" [ngClass]="theCheckbox2 == false ? 'hide' : ''">HSN CODE</th>
+    <th rowspan="2" [ngClass]="theCheckbox3 == false ? 'hide' : ''">DESCRIPTION</th>
+    <th rowspan="2"  style="width: 70px;">QTY</th>
+    <th rowspan="2"  style="width: 70px;">UNIT</th>
+    <th rowspan="1" style="width: 120px;">PRICE/UNIT</th>
+    <th colspan="2" [ngClass]="theCheckbox4 == false ? 'hide' : ''">DISCOUNT</th>
+    <th colspan="2">TAX</th>
+    <th rowspan="2" style="max-width: 100px;">AMOUNT<div class="footer">
+        <button mat-button matSuffix mat-icon-button [matMenuTriggerFor]="beforeMenu">
+          <mat-icon color="primary">add_circle_outline</mat-icon>
+        </button>
+        <mat-menu #beforeMenu="matMenu" xPosition="before">
+          <button mat-menu-item>
+            <mat-checkbox (change)='toggleVisibility($event)' [(ngModel)]='theCheckbox'>Item Category</mat-checkbox>
+          </button>
+          <button mat-menu-item>
+            <mat-checkbox (change)='toggleVisibility($event)' [(ngModel)]='theCheckbox1'>Item Code</mat-checkbox>
+          </button>
+          <button mat-menu-item>
+            <mat-checkbox (change)='toggleVisibility($event)' [(ngModel)]='theCheckbox2'>HSN/SAC Code</mat-checkbox>
+          </button>
+          <button mat-menu-item>
+            <mat-checkbox (change)='toggleVisibility($event)' [(ngModel)]='theCheckbox3'>Description</mat-checkbox>
+          </button>
+          <button mat-menu-item>
+            <mat-checkbox (change)='toggleVisibility($event)' [(ngModel)]='theCheckbox4'>Discount</mat-checkbox>
+          </button>
+        </mat-menu>
+      </div>
+
+
+    </th>
+
+  </tr>
+  <tr>
+    <th >
+      <mat-select [(value)]="selected" style="max-height: 50px;font-size: 80%;">
+        <mat-option value="option1">With Tax</mat-option>
+        <mat-option value="option3">Without Tax</mat-option>
+      </mat-select>
+
+    </th>
+    <th [ngClass]="theCheckbox4 == false ? 'hide' : ''">%</th>
+    <th [ngClass]="theCheckbox4 == false ? 'hide' : ''">AMOUNT</th>
+    <th  style="width: 120px;">%</th>
+    <th style="width: 120px;">AMOUNT</th>
+  </tr>
+  <tr *ngFor="let data of Data  let i=index ">
+    <td>
+      <div class="edit_hover_class"> {{i+1}}<a><button class="icon" mat-button matSuffix mat-icon-button (click) = "deleteRow(i)">
+            <mat-icon color="#ddd">delete</mat-icon>
+          </button></a></div>
+
+    </td>
+    <td [ngClass]="theCheckbox == false ? 'hide' : ''">
+      <mat-select [(value)]="selected">
+        <mat-option value="option1">ALL</mat-option>
+        <mat-option value="option3">General</mat-option>
+      </mat-select>
+    </td>
+    <td>
+
+      <input matInput type="text" [(ngModel)]="data.Item" >
+
+    </td>
+    <td [ngClass]="theCheckbox1 == false ? 'hide' : ''">{{data.ItemCode}}</td>
+    <td [ngClass]="theCheckbox2 == false ? 'hide' : ''">{{data.HsnCode}}</td>
+    <td [ngClass]="theCheckbox3 == false ? 'hide' : ''">{{data.Description}}</td>
+    <td><input matInput type="text" [(ngModel)]="data.Qty"(keyup)="tax($event)"></td>
+    <td>
+      <mat-select [(value)]="selected">
+
+          <mat-option value="option1">None</mat-option>
+          <mat-option *ngFor="let unit of Units" [value]="unit">{{unit}}</mat-option>
+        </mat-select>
+
+    </td>
+    <td>
+      <input matInput type="text" [(ngModel)]="data.PriceUnit"  (keyup)="tax($event)" (keyup)="amountTotal($event)">
+    </td>
+    <td [ngClass]="theCheckbox4 == false ? 'hide' : ''"></td>
+    <td [ngClass]="theCheckbox4 == false ? 'hide' : ''"></td>
+    <td>
+      <mat-select  [(value)]="data.TaxPer" (focus)="tax($event)"(focus)="amountTotal($event)" >
+        <mat-option value="0">None</mat-option>
+        <mat-option value="0">GST@0%</mat-option>
+        <mat-option value="0.0025">GST@0.25%</mat-option>
+        <mat-option value="0.03">GST@3%</mat-option>
+        <mat-option value="0.05">GST@5%</mat-option>
+        <mat-option value="0.12">GST@12%</mat-option>
+        <mat-option value="0.18">GST@18%</mat-option>
+        <mat-option value="0.28">GST@28%</mat-option>
+
+      </mat-select>
+    </td>
+    <td>{{data.TaxAmount}}</td>
+    <td>{{data.Amount}}</td>
+  </tr>
+
+
+  <tr>
+    <th></th>
+    <th [ngClass]="theCheckbox == false ? 'hide' : ''"></th>
+    <th> <button mat-stroked-button color="primary" (click)="adddTable()">Add Row</button>
+      <div class="footer">TOTAL</div>
+    </th>
+    <th [ngClass]="theCheckbox1 == false ? 'hide' : ''"></th>
+    <th [ngClass]="theCheckbox2 == false ? 'hide' : ''"></th>
+    <th [ngClass]="theCheckbox3 == false ? 'hide' : ''"></th>
+    <th>{{getTotalQty()}}</th>
+    <th> </th>
+    <th></th>
+    <th [ngClass]="theCheckbox4 == false ? 'hide' : ''"></th>
+    <th [ngClass]="theCheckbox4 == false ? 'hide' : ''"></th>
+    <th></th>
+    <th></th>
+    <th>{{getTotalCost() | currency}}</th>
+  </tr>
+  <tr id="noBorder"><td ></td></tr>
+  <tr id="noBorder">
+    <td colspan="8"  >
+
+      <mat-form-field appearance="outline">
+        <mat-label>Select an option</mat-label>
+        <mat-select [(value)]="selected">
+          <mat-option value="option1">Cash</mat-option>
+          <mat-option value="option2">Cheque</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div class="align">
+     Total
+      <mat-form-field appearance="outline">
+        <input matInput value="{{getTotalCost() | currency}}" disabled>
+      </mat-form-field>
+      </div>
+    </td>
+  </tr>
+  <tr id="noBorder">
+    <td colspan="8"  >
+
+      <mat-form-field appearance="outline" >
+        <mat-label><mat-icon>note_add</mat-icon>Description</mat-label>
+        <textarea matInput type="text" ></textarea>
+      </mat-form-field>
+
+      <div class="align">
+     Received
+      <mat-form-field appearance="outline" color>
+        <input matInput type="text" value="{{getTotalCost() | currency}}" >
+      </mat-form-field>
+      </div>
+    </td>
+  </tr>
+  <tr id="noBorder">
+    <th colspan="8"  >
+      <button mat-button matSuffix mat-icon-button [matMenuTriggerFor]="beforeMenu">
+        <mat-icon>add_a_photo</mat-icon>
+      </button>
+
+      <div style="text-align: right;margin-top: -40px;margin-right: 35px;">
+     Balance:
+      <mat-form-field appearance="none" color>
+        <input matInput type="text" value="{{getTotalCost() | currency}}" >
+      </mat-form-field>
+      </div>
+    </th>
+  </tr>
+</table>
+
+
